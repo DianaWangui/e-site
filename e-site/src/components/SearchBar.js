@@ -32,17 +32,17 @@ const SearchBar = () => {
   return (
     <div className="flex flex-col items-center space-y-4">
       {/* Search Bar */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-full">
         <input
           type="text"
-          placeholder="Search by category (e.g., Shoes)"
-          className="text-black w-full max-w-lg p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Search for items..."
+          className="text-black w-[100%] p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={searchTerm}
           onChange={handleSearchChange}
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-gray-500 hover:text-white transition duration-300"
         >
           Search
         </button>

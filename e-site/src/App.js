@@ -3,17 +3,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Products from './pages/Products';
+import Signup from './pages/Signup';
+import ProductDetails from './components/ProductDetails';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
+      <div className="pt-16">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
