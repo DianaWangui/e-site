@@ -1,67 +1,53 @@
+// ProductCard.js
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import categories from "../data/categories";
 
-const ProductCard = ({ product, isLoggedIn }) => {
-  const navigate = useNavigate();
-
-  const handleAddToCart = () => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    } else {
-      console.log(`${product.name} added to cart`);
+function ProductCard() {
+  // Function to get remaining stock for a product
+  const getRemainingStock = (productId) => {
+    for (const category of categories) {
+      for (const product of category.products) {
+        if (product.id === productId) {
+          console.log(product.id); 
+          return product.stock || 0;
+        }
+      }
     }
+    return 0;
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4 max-w-sm mx-auto">
-      {/* Product Image */}
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover rounded-md"
-        />
-        <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">
-          Shipped from abroad
-        </span>
-      </div>
-
-      {/* Product Details */}
-      <div className="mt-4">
-        <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
-        <div className="text-gray-600 mt-2 flex items-center space-x-2">
-          <span className="text-xl font-bold text-orange-600">
-            KSh {product.price}
-          </span>
-          {product.originalPrice && (
-            <span className="line-through text-sm text-gray-400">
-              KSh {product.originalPrice}
-            </span>
-          )}
-          {product.discount && (
-            <span className="text-xs bg-green-100 text-green-600 font-medium px-1 py-0.5 rounded">
-              -{product.discount}%
-            </span>
-          )}
+    <div className="p-4">
+      {categories.map((category) => (
+        <div key={category.name} className="mb-10">
+          <h3 className="text-xl font-bold mb-4">{category.name}</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {category.products.map((product, index) => (
+              <Link
+                to={`/product/${product.id}`}
+                key={index}
+                className="block border rounded-lg shadow hover:shadow-lg"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-2">
+                  <h4 className="font-bold text-lg">{product.name}</h4>
+                  <p className="text-lg text-gray-600">Cedis {product.price}</p>
+                  <p className="text-xs text-orange-600 mt-1">
+                    {getRemainingStock(product.id)} items remaining
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-        <p className="text-sm text-gray-500 mt-1">In stock</p>
-        <p className="text-sm text-gray-500 mt-1">
-          + shipping from KSh {product.shippingPrice} to CBD - UON/Globe/Koja
-        </p>
-        <p className="text-sm text-gray-500 mt-1">
-          ⭐ {product.ratings} stars ({product.reviews} verified ratings)
-        </p>
-
-        {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          className="mt-4 w-full bg-orange-500 text-white text-sm font-semibold py-2 rounded hover:bg-orange-600 transition"
-        >
-          ADD TO CART
-        </button>
-      </div>
+      ))}
     </div>
   );
-};
+}
 
 export default ProductCard;
