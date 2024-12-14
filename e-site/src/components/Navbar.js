@@ -49,7 +49,7 @@ function Navbar() {
       {/* Navbar Container */}
       <div className="mr-[10%] ml-[10%] flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold hover:text-gray-500">
+        <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-orange-500">
           MyStore
         </Link>
 
@@ -65,7 +65,7 @@ function Navbar() {
             <div className="relative">
               <button
                 onClick={toggleAccountDropdown}
-                className="flex items-center gap-2 hover:text-gray-500 transition duration-300"
+                className="flex items-center gap-2 text-gray-500 hover:text-orange-500 transition duration-300"
               >
                 <FontAwesomeIcon icon={faUser} className="text-2xl" />
                 <span>Account</span>
@@ -74,19 +74,19 @@ function Navbar() {
                 <div className="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg p-4 w-48">
                   <button
                     onClick={() => handleRestrictedAccess('/profile')}
-                    className="block hover:bg-gray-100 px-4 py-2 rounded-md text-left w-full"
+                    className="block text-gray-500 hover:text-orange-600 px-4 py-2 rounded-md text-left w-full hover:text-white transition duration-300"
                   >
                     Profile
                   </button>
                   <button
                     onClick={() => handleRestrictedAccess('/orders')}
-                    className="block hover:bg-gray-100 px-4 py-2 rounded-md text-left w-full"
+                    className="block text-gray-500 hover:text-orange-600 px-4 py-2 rounded-md text-left w-full hover:text-white transition duration-300"
                   >
                     My Orders
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="block hover:bg-gray-100 px-4 py-2 rounded-md text-left w-full"
+                    className="block text-gray-500 hover:text-orange-600 px-4 py-2 rounded-md text-left w-full hover:text-white transition duration-300"
                   >
                     Logout
                   </button>
@@ -95,15 +95,15 @@ function Navbar() {
             </div>
           ) : (
             // Login Button when user is not logged in
-            <Link to="/login" className="hover:text-gray-500">
+            <Link to="/login" className="text-gray-500 hover:text-orange-500">
               Login
             </Link>
           )}
 
           {/* Cart */}
-          <button className="relative flex items-center hover:text-gray-500">
+          <button className="relative flex items-center text-gray-500 hover:text-orange-500">
             <FontAwesomeIcon icon={faShoppingCart} className="text-3xl" />
-            <span className="absolute -top-3 -right-3 bg-red-800 text-white text-xs rounded-full w-6 h-6 flex justify-center items-center">
+            <span className="absolute -top-3 -right-3 bg-red-600 text-white text-xs rounded-full w-6 h-6 flex justify-center items-center">
               3
             </span>
           </button>

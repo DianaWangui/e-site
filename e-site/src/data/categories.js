@@ -37,7 +37,9 @@ const categories = [
     products: [
       { id: 25, name: 'Christmas Tree', price: 49, stock: 20, image: images['chrismastree.jpg'], description: 'Celebrate the holidays with this beautifully crafted Christmas tree by FestiDecor. Easy to assemble and perfect for all your seasonal decorations.' },
       { id: 26, name: 'Christmas Decor', price: 19, stock: 50, image: images['cdecor.jpg'], description: 'Add a festive touch to your home with this elegant Christmas decor set by BrightLights. Includes energy-efficient LED lights and ornaments.' },
-      { id: 27, name: 'Gift Hampers', price: 89, stock: 10, image: images['cgift.jpg'], description: 'Delight your loved ones with these thoughtfully curated gift hampers from PresentCo. Packed with premium treats and surprises.' },
+      { id: 27, name: 'Gift Hampers', price: 89, stock: 10, image: images['flashsale3.png'], description: 'Delight your loved ones with these thoughtfully curated gift hampers from PresentCo. Packed with premium treats and surprises.' },
+      { id: 25, name: 'Gift Hampers', price: 49, stock: 20, image: images['FlashSales1.png'], description: 'Celebrate the holidays with this beautifully crafted Christmas tree by FestiDecor. Easy to assemble and perfect for all your seasonal decorations.' },
+      { id: 26, name: 'Gift Hampers', price: 19, stock: 50, image: images['flashsale2.png'], description: 'Add a festive touch to your home with this elegant Christmas decor set by BrightLights. Includes energy-efficient LED lights and ornaments.' },
     ],
   },
   {
