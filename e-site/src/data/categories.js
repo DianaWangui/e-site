@@ -1,79 +1,172 @@
-// Dynamically import all images from the 'images' folder
+// // Dynamically import all images from the 'images' folder
+// const importAll = (requireContext) => {
+//   const images = {};
+//   requireContext.keys().forEach((key) => {
+//     const imageName = key.replace('./', ''); // Get image file name
+//     images[imageName] = requireContext(key);
+//   });
+//   return images;
+// };
+
+// // Import all images
+// const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+
 const importAll = (requireContext) => {
   const images = {};
-  requireContext.keys().forEach((key) => {
-    const imageName = key.replace('./', ''); // Get image file name
-    images[imageName] = requireContext(key);
-  });
+  try {
+    requireContext.keys().forEach((key) => {
+      const imageName = key.replace('./', '');
+      images[imageName] = requireContext(key);
+    });
+  } catch (error) {
+    console.error('Error loading images:', error);
+  }
   return images;
 };
 
-// Import all images
 const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 
-// Define categories
 const categories = [
   {
+    id: 1, // Unique category ID
     name: 'Best Selling',
     products: [
-      { id: 19, name: 'Headphones', price: 149, stock: 12, image: images['headphone2.jpg'], description: 'Immerse yourself in crystal-clear sound with our noise-canceling headphones. Designed by SonicTech, these headphones deliver deep bass and premium audio. Ideal for music, gaming, or work, they come with a comfortable, adjustable fit.' },
-      { id: 1, name: 'Smart Watch', price: 499, stock: 15, image: images['watch1.jpg'], description: 'Stay connected and active with this smartwatch by TechGear. Track your fitness, receive notifications, and monitor your health. Durable and water-resistant, it’s perfect for your busy lifestyle.' },
-      { id: 2, name: 'Laptop', price: 899, stock: 10, image: images['laptop.jpg'], description: 'Experience powerful performance with the latest UltraBook by Innovate. This lightweight laptop is equipped with a high-speed processor, vibrant display, and all-day battery life for work or entertainment.' },
-      { id: 6, name: 'Drone', price: 599, stock: 8, image: images['drone1.jpg'], description: 'Capture breathtaking aerial shots with this compact drone from SkyView. Equipped with a 4K camera and easy-to-use controls, it’s ideal for professionals and hobbyists alike.' },
-      { id: 3, name: 'Tablet', price: 299, stock: 20, image: images['tablet1.jpg'], description: 'Enjoy seamless browsing and entertainment on this high-resolution tablet by StreamLine. Lightweight and versatile, it’s perfect for reading, streaming, or work on the go.' },
+      { 
+        id: 101, 
+        name: 'Headphones', 
+        price: 149, 
+        stock: 12, 
+        image: images['headphone2.jpg'], 
+        description: 'Immerse yourself in crystal-clear sound with our noise-canceling headphones. Designed by SonicTech, these headphones deliver deep bass and premium audio. Ideal for music, gaming, or work, they come with a comfortable, adjustable fit.' 
+      },
+      { 
+        id: 102, 
+        name: 'Smart Watch', 
+        price: 499, 
+        stock: 15, 
+        image: images['watch1.jpg'], 
+        description: 'Stay connected and active with this smartwatch by TechGear. Track your fitness, receive notifications, and monitor your health. Durable and water-resistant, it’s perfect for your busy lifestyle.' 
+      },
+      { 
+        id: 103, 
+        name: 'Laptop', 
+        price: 899, 
+        stock: 10, 
+        image: images['laptop.jpg'], 
+        description: 'Experience powerful performance with the latest UltraBook by Innovate. This lightweight laptop is equipped with a high-speed processor, vibrant display, and all-day battery life for work or entertainment.' 
+      },
     ],
   },
   {
+    id: 2,
     name: 'On Offer',
     products: [
-      { id: 6, name: 'Camera', price: 599, stock: 8, image: images['camera1.jpg'], description: 'Capture your best moments with this high-definition camera by PhotoPro. Featuring advanced image stabilization and low-light capabilities, it’s perfect for professionals and beginners.' },
-      { id: 1, name: 'Smart Watch', price: 499, stock: 15, image: images['watch2.jpg'], description: 'Monitor your health, fitness, and notifications with this smartwatch by NextGen. Durable, stylish, and packed with features to keep you on track.' },
-      { id: 12, name: 'Sneakers', price: 79, stock: 30, image: images['shoe3.jpg'], description: 'Step into comfort with these premium sneakers from FlexWear. Designed for durability and everyday use, they’re perfect for both casual and active lifestyles.' },
-      { id: 13, name: 'Hat', price: 19, stock: 60, image: images['shoe5.jpg'], description: 'Stay stylish with this classic hat by ChicTrend. Made from high-quality materials, it’s perfect for any outfit and season.' },
+      { 
+        id: 104, 
+        name: 'Camera', 
+        price: 599, 
+        stock: 8, 
+        image: images['camera1.jpg'], 
+        description: 'Capture your best moments with this high-definition camera by PhotoPro. Featuring advanced image stabilization and low-light capabilities, it’s perfect for professionals and beginners.' 
+      },
+      { 
+        id: 105, 
+        name: 'Drone', 
+        price: 1299, 
+        stock: 5, 
+        image: images['drone1.jpg'], 
+        description: 'Take your photography to new heights with this easy-to-fly drone by SkyZoom. Equipped with 4K Ultra HD cameras and intelligent flight modes.' 
+      },
+      { 
+        id: 102, // Same Smart Watch but shared with 'Best Selling'
+        name: 'Smart Watch', 
+        price: 499, 
+        stock: 15, 
+        image: images['watch2.jpg'], 
+        description: 'Monitor your health, fitness, and notifications with this smartwatch by NextGen. Durable, stylish, and packed with features to keep you on track.' 
+      },
     ],
   },
   {
-    name: 'Christmas Deals',
-    products: [
-      { id: 25, name: 'Christmas Tree', price: 49, stock: 20, image: images['chrismastree.jpg'], description: 'Celebrate the holidays with this beautifully crafted Christmas tree by FestiDecor. Easy to assemble and perfect for all your seasonal decorations.' },
-      { id: 26, name: 'Christmas Decor', price: 19, stock: 50, image: images['cdecor.jpg'], description: 'Add a festive touch to your home with this elegant Christmas decor set by BrightLights. Includes energy-efficient LED lights and ornaments.' },
-      { id: 27, name: 'Gift Hampers', price: 89, stock: 10, image: images['flashsale3.png'], description: 'Delight your loved ones with these thoughtfully curated gift hampers from PresentCo. Packed with premium treats and surprises.' },
-      { id: 25, name: 'Gift Hampers', price: 49, stock: 20, image: images['FlashSales1.png'], description: 'Celebrate the holidays with this beautifully crafted Christmas tree by FestiDecor. Easy to assemble and perfect for all your seasonal decorations.' },
-      { id: 26, name: 'Gift Hampers', price: 19, stock: 50, image: images['flashsale2.png'], description: 'Add a festive touch to your home with this elegant Christmas decor set by BrightLights. Includes energy-efficient LED lights and ornaments.' },
-    ],
-  },
-  {
+    id: 3,
     name: 'Electronics',
     products: [
-      { id: 6, name: 'Camera', price: 599, stock: 8, image: images['camera1.jpg'], description: 'High-resolution digital camera by VisionCraft, featuring advanced optics for professional-quality photos and videos.' },
-      { id: 1, name: 'Smartphone', price: 499, stock: 15, image: images['watch1.jpg'], description: 'Stay ahead with the latest smartphone by InfinityTech. Sleek design, long battery life, and powerful performance for all your needs.' },
-      { id: 2, name: 'Laptop', price: 899, stock: 10, image: images['laptop.jpg'], description: 'Innovative and efficient, this laptop from PrimeTech offers smooth multitasking and a stunning display for all your projects.' },
-      { id: 6, name: 'Drone', price: 599, stock: 8, image: images['drone1.jpg'], description: 'Navigate the skies with ease using this advanced drone by AeroVision. Features a 4K camera for capturing cinematic footage.' },
-      { id: 3, name: 'Tablet', price: 299, stock: 20, image: images['tablet1.jpg'], description: 'Versatile tablet by DigiGo, perfect for streaming, gaming, and productivity with its vivid display and smooth performance.' },
-      { id: 4, name: 'Smartwatch', price: 199, stock: 25, image: images['watch2.jpg'], description: 'Track your fitness and stay connected with this premium smartwatch by ActiveTime. Stylish and feature-rich for everyday use.' },
-      { id: 5, name: 'Headphones', price: 129, stock: 30, image: images['headphone1.jpg'], description: 'Experience immersive sound with these premium headphones by SoundPulse. Noise-canceling and lightweight for long-term comfort.' },
-      { id: 7, name: 'Drone', price: 799, stock: 5, image: images['drone2.jpg'], description: 'Capture stunning aerial videos with this compact drone from SkyZoom. Equipped with HD recording and easy-to-use controls.' },
-      { id: 8, name: 'Smart TV', price: 999, stock: 7, image: images['tv.jpg'], description: 'Transform your viewing experience with this 4K Smart TV by VisionPlus. Stunning clarity, vibrant colors, and built-in streaming apps.' },
+      { 
+        id: 106, 
+        name: 'Television', 
+        price: 1200, 
+        stock: 7, 
+        image: images['tv.jpg'], 
+        description: 'Watch your favorite shows and movies in stunning 4K resolution with the new UltraHD Smart TV. With built-in apps and a sleek design, it’s the perfect addition to your living room.' 
+      },
+      { 
+        id: 107, 
+        name: 'Camera', 
+        price: 349, 
+        stock: 10, 
+        image: images['camera1.jpg'], 
+        description: 'Elevate your home theater experience with this high-quality soundbar. Offering powerful bass and crystal-clear audio for movies, music, and more.' 
+      },
+      { 
+        id: 105, // Same Drone shared with 'On Offer'
+        name: 'Drone', 
+        price: 1299, 
+        stock: 5, 
+        image: images['drone1.jpg'], 
+        description: 'Take your photography to new heights with this easy-to-fly drone by SkyZoom. Equipped with 4K Ultra HD cameras and intelligent flight modes.' 
+      },
     ],
   },
   {
-    name: 'Shoes & Clothing',
+    id: 4,
+    name: 'Home Essentials',
     products: [
-      { id: 9, name: 'T-Shirt', price: 29, stock: 50, image: images['shoe1.jpg'], description: 'Stay comfortable and stylish with this breathable cotton t-shirt from CasualWear. Perfect for everyday wear and easy to pair with jeans.' },
-      { id: 10, name: 'Jeans', price: 59, stock: 40, image: images['shoe4.jpg'], description: 'Durable and trendy jeans by DenimPro, designed for style and comfort. Ideal for casual outings and versatile enough for any wardrobe.' },
-      { id: 11, name: 'Jacket', price: 89, stock: 20, image: images['shoe2.jpg'], description: 'Stay warm and fashionable with this winter jacket from ArcticLine. Perfect for cold weather and built with high-quality materials for durability.' },
-      { id: 12, name: 'Sneakers', price: 79, stock: 30, image: images['shoe3.jpg'], description: 'Enjoy comfort and support with these athletic sneakers from MoveMax. Ideal for running, walking, or casual outings.' },
-      { id: 13, name: 'Hat', price: 19, stock: 60, image: images['shoe5.jpg'], description: 'Add a stylish finishing touch to your outfit with this classic hat by UrbanStyle. Lightweight and perfect for any season.' },
+      { 
+        id: 108, 
+        name: 'Washing Machine', 
+        price: 750, 
+        stock: 4, 
+        image: images['washingmachine.jpg'], 
+        description: 'Make laundry a breeze with this energy-efficient washing machine. Designed for large loads and gentle care for your clothes.' 
+      },
+      { 
+        id: 109, 
+        name: 'Microwave', 
+        price: 199, 
+        stock: 9, 
+        image: images['microwave.jpg'], 
+        description: 'Prepare meals quickly and easily with this high-capacity microwave. Featuring multiple cooking modes and a sleek design.' 
+      },
+      { 
+        id: 110, 
+        name: 'Refrigerator', 
+        price: 1200, 
+        stock: 3, 
+        image: images['fridge.jpg'], 
+        description: 'Keep your food fresh and organized with this spacious refrigerator. Energy-efficient with smart cooling technology.' 
+      },
     ],
   },
   {
-    name: 'Home Appliances',
+    id: 5,
+    name: 'Holiday Specials',
     products: [
-      { id: 14, name: 'Blender', price: 49, stock: 25, image: images['blender.jpg'], description: 'Create delicious smoothies and more with this powerful blender from KitchenEase. Featuring multiple speed settings for all your blending needs.' },
-      { id: 15, name: 'Microwave', price: 199, stock: 10, image: images['microwave.jpg'], description: 'Prepare meals in minutes with this compact microwave by HeatMaster. Easy-to-use controls and energy-efficient performance.' },
-      { id: 16, name: 'Vacuum Cleaner', price: 299, stock: 15, image: images['washingmachine.jpg'], description: 'Keep your home spotless with this high-performance vacuum cleaner from DustAway. Lightweight and equipped with advanced suction technology.' },
-      { id: 17, name: 'Refrigerator', price: 499, stock: 5, image: images['fridge.jpg'], description: 'Keep your food fresh and organized with this energy-efficient refrigerator by ChillZone. Spacious interior and modern design.' },
-      { id: 18, name: 'Washing Machine', price: 599, stock: 8, image: images['washingm.jpg'], description: 'Save time on laundry with this advanced washing machine by CleanPro. Features multiple wash settings and a large drum capacity.' },
+      { 
+        id: 111, 
+        name: 'Christmas Tree', 
+        price: 79, 
+        stock: 20, 
+        image: images['chrismastree.jpg'], 
+        description: 'Celebrate the holiday season with this beautiful, pre-lit Christmas tree. Easy to assemble and perfect for any home.' 
+      },
+      { 
+        id: 112, 
+        name: 'Gift Hamper', 
+        price: 59, 
+        stock: 25, 
+        image: images['flashsale2.png'], 
+        description: 'A perfect gift for your loved ones, filled with delicious treats and holiday surprises.' 
+      },
     ],
   },
 ];
