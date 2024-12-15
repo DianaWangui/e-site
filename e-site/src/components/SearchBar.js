@@ -1,19 +1,15 @@
-// src/components/SearchBar.js
-
 import React, { useState } from 'react';
-import products from '../data/categories'; // Import dummy product data
+import products from '../data/categories';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Handle the search button click
   const handleSearch = () => {
     const query = searchTerm.toLowerCase();
     const results = products.filter((product) =>
@@ -31,18 +27,17 @@ const SearchBar = () => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      {/* Search Bar */}
       <div className="flex gap-2 w-full">
         <input
           type="text"
-          placeholder="Search for items..."
-          className="text-black w-[100%] p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Search for a product category..."
+          className="text-black w-[100%] p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-custom-green"
           value={searchTerm}
           onChange={handleSearchChange}
         />
         <button
           onClick={handleSearch}
-          className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-gray-500 hover:text-white transition duration-300"
+          className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-custom-green hover:text-white transition duration-300"
         >
           Search
         </button>

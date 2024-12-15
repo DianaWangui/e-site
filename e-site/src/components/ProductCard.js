@@ -9,7 +9,6 @@ function ProductCard() {
     for (const category of categories) {
       for (const product of category.products) {
         if (product.id === productId) {
-          console.log(product.id); 
           return product.stock || 0;
         }
       }
