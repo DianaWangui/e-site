@@ -1,4 +1,5 @@
-import React from 'react';
+// App.js
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -10,11 +11,15 @@ import Profile from './pages/Profile';
 import MyOrders from './pages/MyOrders';
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <Router>
-      <Navbar />
+      {/* Pass setSearchResults to Navbar for updating results */}
+      <Navbar setSearchQuery={setSearchQuery}  />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Pass searchResults to Home to display searched products */}
+        <Route path="/" element={<Home searchQuery={searchQuery} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -22,7 +27,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<MyOrders />} />
       </Routes>
-     
     </Router>
   );
 }
