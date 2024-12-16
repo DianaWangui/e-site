@@ -5,7 +5,7 @@ import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
 import { useCart } from '../context/CartContext';
 
-function Navbar() {
+function Navbar({ setSearchQuery }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -53,7 +53,7 @@ function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('loggedIn'); 
+    localStorage.removeItem('loggedIn');
     setUser(null);
     navigate('/login');
   };
@@ -64,8 +64,9 @@ function Navbar() {
         <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-orange-500">
           MyStore
         </Link>
+        {/* SearchBar only in the navbar */}
         <div className="hidden md:block w-1/3">
-          <SearchBar />
+          <SearchBar onSearch={setSearchQuery} />
         </div>
         <div className="hidden md:flex items-center gap-6">
           {user ? (
@@ -123,11 +124,13 @@ function Navbar() {
           ☰
         </button>
       </div>
+      {/* Mobile menu */}
       <div
         className={`md:hidden mt-4 transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'block' : 'hidden'}`}
       >
         <div className="flex flex-col gap-4">
-          <SearchBar />
+          {/* SearchBar for mobile */}
+          <SearchBar onSearch={setSearchQuery} />
           {!user ? (
             <Link to="/login" className="hover:text-gray-500">
               Login
