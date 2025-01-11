@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+// Dummy order data moved outside the component
+const dummyOrders = [
+  {
+    id: 'ORD001',
+    items: ['Product 1', 'Product 2'],
+    total: 120.50,
+  },
+  {
+    id: 'ORD002',
+    items: ['Product 3'],
+    total: 85.75,
+  },
+  {
+    id: 'ORD003',
+    items: ['Product 4'],
+    total: 55.20,
+  },
+];
 
 const MyOrders = () => {
-  // Dummy order data
-  const dummyOrders = [
-    {
-      id: 'ORD001',
-      items: ['Product 1', 'Product 2'],
-      total: 120.50,
-    },
-    {
-      id: 'ORD002',
-      items: ['Product 3'],
-      total: 85.75,
-    },
-    {
-      id: 'ORD003',
-      items: ['Product 4'],
-      total: 55.20,
-    },
-  ];
-
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const MyOrders = () => {
     const storedOrders = JSON.parse(localStorage.getItem('userOrders')) || dummyOrders;
     localStorage.setItem('userOrders', JSON.stringify(storedOrders)); // Store orders in localStorage
     setOrders(storedOrders);
-  }, []);
+  }, []); // Empty dependency array since dummyOrders is outside the component
 
   if (orders.length === 0) {
     return <div className="mt-16 text-center">No orders found.</div>;
